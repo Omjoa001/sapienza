@@ -1,7 +1,9 @@
-# Race Conditions
+# Security Principles
 <sub>19.okt</sub>
 
-Race condition occurs when two concurrent execution threads both execute on shared state and this is not done atomically. As an example you can take advantage of `mkdir` on Unix by creating symbolic links between the non-atomic directory creation actions to become the owner of files one should not have access to.
+### Race conditions
+
+A race condition occurs when two concurrent execution threads both execute on shared state and this is not done atomically. As an example you can take advantage of `mkdir` on Unix by creating symbolic links between the non-atomic directory creation actions to become the owner of files one should not have access to.
 
 ![Race condition example](./img/race_cond.png)
 
@@ -40,10 +42,45 @@ A issue found in SSL approximates to the following, where step 2 and 3 occasiona
   - In java:
     - ```grant codeBase```
     - Avoid public when you can use ```private``` or ```package```:
-      - not ``` public int x;```
-      - but ``` private int x; ```
+      - not ```public int x;```
+      - but ```private int x;```
 - Compartmentalize
   - Run web application on a different machine from user database
   - Sealing different compartments of a ship will delay sinking.
   - Partition harddisk and install OS twice
-  - chroot jail
+  - ```chroot``` jail (change a users home directory)
+  - Virtualization, (using [hypervisor](https://www.vmware.com/topics/glossary/content/hypervisor#:~:text=A%20hypervisor%2C%20also%20known%20as,such%20as%20memory%20and%20processing.))
+- Minimize attack surface
+  - Minimize open sockets, services, admin accounts, directories with weak access control etc.
+  - Log off user/lock screen after n minutes
+- Use security defaults
+  - Safety without the admin having to actively monitor
+- Keep it simple stupid (KISS)
+  - Complexity leads to unforeseen feature interaction
+  - using a so-called choke point, a small interface through which all control flow must pass.
+- Fail securely
+  - if something fails, you don't compromise security policy
+  - incorrect handling of unexpected errors is a major cause of security breaches
+  - Failing insecurely can lead to information leakage, ignoring errors, misinterpreting errors etc.
+
+- Promote pricacy
+  - ```telnet``` giving away too much information
+  - Blind SQL injection relies on extracting information about the structure of the database, also upon failing insecurely.
+- Kerckhoffs principle
+  - Assume attackers know the source code, and can reverse engineer binaries. Security by obscurity is a bad idea!
+  - Use community resources to avoid known mistakes, and don't implement your own cryptography.
+- Principle of psychological acceptance
+  - Users are lazy, don't make security mechanism cumbersome
+- Clearly assign reponsibilites
+  - Organizational level
+    - One person responsible for something, rather than two or a whole group
+  - Coding level
+    - One module/classresponsible for input validation, access control etc.
+- Identify your assumptions
+  - These may be sources of vulnerability
+  - Also Minimize TCB (Trusted Computer Base)
+- Be edgy, trust no one. 
+  - All input is evil! (buffer overflow, SQL injection, XSS on websites)
+  - Third party software.
+
+Saltzer and Schroeder design principles go through much of the same.
