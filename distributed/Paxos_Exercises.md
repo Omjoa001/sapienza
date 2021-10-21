@@ -47,11 +47,9 @@ Lets take a case where proposer _p_ sends a **prepare()** message and the accept
 
 Take an instance where we 
 
-<!-- 
 Another instance, prepare(7), promise(7,-,-), accept(7,13). But then one proposer is slow, so learn(7,13) does not go through from all the acceptors. Then a new round starts so we go prepare(8), promise(8,-,-), accept(8,17) which then gets accepted and sent as learn(8,17). So we eventually reach a vote, where the learners discard the learn(7,13) votes since it was not a majority. If a new round 9 were to being proposed and start, taking the values from the max last round shows its importance, since taking 13 from round 7 is not accepted when you have nodes that return value 17 from round 8.
--->
+
 # Excercise 9
 **Show that Fast Paxos is not safe if we assume the same number of crash failures of Paxos.**
-
 
 With 9 acceptors, f is 2. (N-f/3)
