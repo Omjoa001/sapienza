@@ -42,3 +42,22 @@ $h_0(x)=0_0+0_1*frontage+0_2*depth$
 <sub>Note that in Amsterdam, the larger the facade, the more costly the house</sub>
 
 You could use a polynomial regression for the resulting function, but be aware of overitting and underfitting. For instance while a parabol function might look right at first it will have this shape $\bigcap$ which will turn out to be wrong for a lot of the data points later in the range.
+
+Underfitting $h_0. 0_0 + 0_2 ‰ + 0_2 ‰^2$
+
+## Normal Equation
+<sub>21.okt</sub>
+
+[Lekse: ](https://towardsdatascience.com/machine-leaning-cost-function-and-gradient-descend-75821535b2ef)
+
+The trace $tr$ is the sum of the elements on the diagonal. 
+
+$tr AB = tr BA$
+
+$f(A) = tr BA$
+
+$tr A = tr A^T$ where $^T$ is the transpose. The trace of matrix
+
+If $a E R$ then $tr a = a$
+
+### lost af her, sjekk reference på powerpointen han legger ut, les boka
