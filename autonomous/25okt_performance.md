@@ -71,7 +71,7 @@ Drop the graphical interface by changing to ```PLOT_SIM=FALSE``` in utilites. Al
 
 To go back in time to a previous step, you can save the simulation by turning the ```SAVE_PLOT=TRUE``` which saves the pictures in ```SAVE_PLOT_DIR=data/plots/```
 
-To implement your own routing. Create a new file/dulicate an existing routing into the routin dir. Make a class of your routing where you define the ```relay_selection(selc, opt_neighbours)```. opt_neighbours is the list of drones you can communicate with.
+To implement your own routing. Create a new file/dulicate an existing routing into the routin dir. Make a class of your routing where you define the ```relay_selection(self, opt_neighbours)```. opt_neighbours is the list of drones you can communicate with.
 
 When changing the used routing, import it in utilites and insert in ```Routing algorithm(Enum)``` and finally change the routing variable.
 
@@ -105,6 +105,11 @@ for hll_pck, clone_Drone in opt_neighbors:
     close_drone_pos=hll_pck.cur_pos
     close_drone_speed=hll_pck.speed
     hll_pck_timestep_creation=hll_pck.time_step_creation
+    next_target_close_drone = hll_pck.next_target #Where is it going?
+
+    # util.euclidean_distance ( --> meters)
+    delta_timesteps=None
+    delta_seconds = delta_timestamps * self.simulator.time_step_duration
 
     distance_close_crone_to_Bs= util.euclidean_distance(close_drone_pos,depot_pos)
 
@@ -115,3 +120,5 @@ for hll_pck, clone_Drone in opt_neighbors:
 
 return drone_to_send
 ```
+
+For every simulation you run, you get a JSON file. This will help you work with finding something like the mean and plot the data. Use a library to read the JSON files. Make a script to work on many JSON files.
